@@ -3,6 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    flake-parts.url = "github:hercules-ci/flake-parts";
+    import-tree.url = "github:denful/import-tree";
+    systems.url = "github:nix-systems/default";
     mangowm = {
       url = "github:mangowm/mango";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -13,15 +16,12 @@
     };
   };
 
-  outputs = inputs@{ self, nixpkgs, mangowm, ... }: {
-    nixosConfigurations.daedalus = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { inherit inputs; };
-      modules = [
-        ./configuration.nix
-        ./hardware-configuration.nix
-        mangowm.nixosModules.mango
-      ];
-    };
+  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+    imports = [
+      inputs.flake-parts.flakeModules.modules
+      (inputs.import-tree ./modules)
+      (inputs.import-tree ./hosts)
+    ];
+    systems = import inputs.systems;
   };
 }
