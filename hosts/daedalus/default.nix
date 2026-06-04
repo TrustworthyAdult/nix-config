@@ -23,6 +23,7 @@
       ghostty
       neovim
       git
+      gh
       openttd
       ./_hardware.nix
     ];
