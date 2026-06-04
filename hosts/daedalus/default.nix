@@ -13,8 +13,11 @@
       nix
       boot
       networking
+      power
       locale
       users
+      zsh
+      starship
       audio
       display
       mango
