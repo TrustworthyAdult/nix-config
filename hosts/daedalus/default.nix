@@ -10,11 +10,20 @@
 
   flake.modules.nixos.daedalus = {
     imports = with self.modules.nixos; [
-      core
-      desktop
-      environment
-      apps
-      dev
+      nix
+      boot
+      networking
+      locale
+      users
+      audio
+      display
+      mango
+      noctalia
+      firefox
+      ghostty
+      neovim
+      git
+      openttd
       ./_hardware.nix
     ];
 
