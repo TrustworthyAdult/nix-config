@@ -1,5 +1,8 @@
 { ... }: {
   flake.modules.nixos.zsh = {
-    programs.zsh.enable = true;
+    programs.zsh = {
+        enable = true;
+        syntaxHighlighting.enable = true;
+    };
   };
 }

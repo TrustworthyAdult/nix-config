@@ -28,6 +28,7 @@
       git
       gh
       openttd
+      zoxide
       ./_hardware.nix
     ];
 
