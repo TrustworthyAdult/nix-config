@@ -5,21 +5,37 @@
         inherit pkgs;
         modules = [{
           config.vim = {
-            theme.enable = false;
-            extraPlugins = {
-              kanagawa = {
-                package = pkgs.vimPlugins.kanagawa-nvim;
-                setup = "require('kanagawa').setup({ transparent = true })";
-              };
+                statusline.lualine.enable = true;
+            theme = {
+                enable = true;
+                name = "nord";
+                transparent = true;
             };
-            luaConfigPost = ''
-              vim.cmd.colorscheme("kanagawa-dragon")
-            '';
+            # extraPlugins = {
+            #   kanagawa = {
+            #     package = pkgs.vimPlugins.kanagawa-nvim;
+            #     setup = "require('kanagawa').setup({ transparent = true })";
+            #   };
+            # };
+            # luaConfigPost = ''
+            #   vim.cmd.colorscheme("kanagawa-dragon")
+            # '';
             binds.whichKey.enable = true;
             telescope.enable = true;
             utility.oil-nvim = {
                 enable = true;
                 gitStatus.enable = true;
+            };
+
+            autocomplete.blink-cmp.enable = true;
+
+            lsp.enable = true;
+
+            languages = {
+                enableTreesitter = true;
+                nix = {
+                        enable = true;
+                };
             };
           };
         }];

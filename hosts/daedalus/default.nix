@@ -29,6 +29,7 @@
       gh
       openttd
       zoxide
+      dolphin
       ./_hardware.nix
     ];
 
