@@ -1,5 +1,8 @@
-{ ... }: {
-  flake.modules.nixos.git = { pkgs, ... }: {
-    environment.systemPackages = [ pkgs.git ];
-  };
+{ ... }:
+{
+  flake.modules.nixos.git =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [ pkgs.git ];
+    };
 }

@@ -1,5 +1,8 @@
-{ ... }: {
-  flake.modules.nixos.zoxide = { pkgs, ... }: {
-    environment.systemPackages = [ pkgs.zoxide ];
-  };
+{ ... }:
+{
+  flake.modules.nixos.zoxide =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [ pkgs.zoxide ];
+    };
 }

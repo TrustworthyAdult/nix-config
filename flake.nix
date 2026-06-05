@@ -18,15 +18,19 @@
     zen-browser.url = "github:youwen5/zen-browser-flake";
   };
 
-  outputs = inputs: inputs.flake-parts.lib.mkFlake { inherit inputs; } {
-    imports = [
-      inputs.flake-parts.flakeModules.modules
-      (inputs.import-tree ./modules)
-      (inputs.import-tree ./hosts)
-    ];
-    systems = import inputs.systems;
-    perSystem = { pkgs, ... }: {
-      formatter = pkgs.nixfmt;
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [
+        inputs.flake-parts.flakeModules.modules
+        (inputs.import-tree ./modules)
+        (inputs.import-tree ./hosts)
+      ];
+      systems = import inputs.systems;
+      perSystem =
+        { pkgs, ... }:
+        {
+          formatter = pkgs.nixfmt;
+        };
     };
-  };
 }

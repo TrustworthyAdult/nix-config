@@ -1,63 +1,69 @@
-{ inputs, ... }: {
-  flake.modules.nixos.neovim = { pkgs, ... }: {
-    environment.systemPackages = [
-      (inputs.nvf.lib.neovimConfiguration {
-        inherit pkgs;
-        modules = [{
-          config.vim = {
+{ inputs, ... }:
+{
+  flake.modules.nixos.neovim =
+    { pkgs, ... }:
+    {
+      environment.systemPackages = [
+        (inputs.nvf.lib.neovimConfiguration {
+          inherit pkgs;
+          modules = [
+            {
+              config.vim = {
                 statusline.lualine.enable = true;
-            theme = {
-                enable = true;
-                name = "nord";
-                transparent = true;
-            };
-            # extraPlugins = {
-            #   kanagawa = {
-            #     package = pkgs.vimPlugins.kanagawa-nvim;
-            #     setup = "require('kanagawa').setup({ transparent = true })";
-            #   };
-            # };
-            # luaConfigPost = ''
-            #   vim.cmd.colorscheme("kanagawa-dragon")
-            # '';
-            binds.whichKey.enable = true;
-            telescope.enable = true;
-            utility.oil-nvim = {
-                enable = true;
-                gitStatus.enable = true;
-            };
+                mini.icons.enable = true;
+                theme = {
+                  enable = true;
+                  name = "nord";
+                  transparent = false;
+                };
+                # extraPlugins = {
+                #   kanagawa = {
+                #     package = pkgs.vimPlugins.kanagawa-nvim;
+                #     setup = "require('kanagawa').setup({ transparent = true })";
+                #   };
+                # };
+                # luaConfigPost = ''
+                #   vim.cmd.colorscheme("kanagawa-dragon")
+                # '';
+                binds.whichKey.enable = true;
+                telescope.enable = true;
+                utility.oil-nvim = {
+                  enable = true;
+                  gitStatus.enable = true;
+                };
 
-            autocomplete.blink-cmp = {
-              enable = true;
-              setupOpts = {
-                completion = {
-                  menu.border = "rounded";
-                  documentation.window.border = "rounded";
+                autocomplete.blink-cmp = {
+                  enable = true;
+                  setupOpts = {
+                    completion = {
+                      menu.border = "rounded";
+                      documentation.window.border = "rounded";
+                    };
+                  };
+                };
+
+                lsp.enable = true;
+
+                languages = {
+                  enableTreesitter = true;
+                  nix = {
+                    enable = true;
+                    format.enable = true;
+                  };
+                  rust = {
+                    enable = true;
+                    format.enable = true;
+                    crates.enable = true;
+                  };
+                  python = {
+                    enable = true;
+                    format.enable = true;
+                  };
                 };
               };
-            };
-
-            lsp.enable = true;
-
-            languages = {
-              enableTreesitter = true;
-              nix = {
-                enable = true;
-                format.enable = true;
-              };
-              rust = {
-                enable = true;
-                format.enable = true;
-                crates.enable = true;
-              };
-              python = {
-                enable = true;
-                format.enable = true;
-              };
-            };
-          };
-        }];
-      }).neovim
-    ];
-  };
+            }
+          ];
+        }).neovim
+      ];
+    };
 }
