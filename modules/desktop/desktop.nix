@@ -1,6 +1,7 @@
 { ... }:
 {
-  flake.modules.nixos.audio = {
+  flake.modules.nixos.desktop = {
+    services.displayManager.ly.enable = true;
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {

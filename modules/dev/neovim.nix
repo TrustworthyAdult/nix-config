@@ -9,6 +9,8 @@
           modules = [
             {
               config.vim = {
+
+                # --- ui ---
                 statusline.lualine.enable = true;
                 mini.icons.enable = true;
                 theme = {
@@ -25,13 +27,18 @@
                 # luaConfigPost = ''
                 #   vim.cmd.colorscheme("kanagawa-dragon")
                 # '';
+
+                # --- binds ---
                 binds.whichKey.enable = true;
+
+                # --- navigation ---
                 telescope.enable = true;
                 utility.oil-nvim = {
                   enable = true;
                   gitStatus.enable = true;
                 };
 
+                # --- completion ---
                 autocomplete.blink-cmp = {
                   enable = true;
                   setupOpts = {
@@ -42,8 +49,10 @@
                   };
                 };
 
+                # --- lsp ---
                 lsp.enable = true;
 
+                # --- languages ---
                 languages = {
                   enableTreesitter = true;
                   nix = {
@@ -53,13 +62,14 @@
                   rust = {
                     enable = true;
                     format.enable = true;
-                    crates.enable = true;
+                    extensions.crates-nvim.enable = true;
                   };
                   python = {
                     enable = true;
                     format.enable = true;
                   };
                 };
+
               };
             }
           ];

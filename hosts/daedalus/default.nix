@@ -17,18 +17,14 @@
       locale
       users
       zsh
-      starship
-      audio
-      display
+      desktop
       mango
       noctalia
       zen-browser
       ghostty
       neovim
       git
-      gh
       openttd
-      zoxide
       dolphin
       fastfetch
       ./_hardware.nix

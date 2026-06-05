@@ -3,6 +3,9 @@
   flake.modules.nixos.git =
     { pkgs, ... }:
     {
-      environment.systemPackages = [ pkgs.git ];
+      environment.systemPackages = [
+        pkgs.git
+        pkgs.gh
+      ];
     };
 }
