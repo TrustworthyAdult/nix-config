@@ -30,6 +30,7 @@
       openttd
       zoxide
       dolphin
+      fastfetch
       ./_hardware.nix
     ];
 

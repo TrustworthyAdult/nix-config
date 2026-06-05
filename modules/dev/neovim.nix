@@ -27,15 +27,33 @@
                 gitStatus.enable = true;
             };
 
-            autocomplete.blink-cmp.enable = true;
+            autocomplete.blink-cmp = {
+              enable = true;
+              setupOpts = {
+                completion = {
+                  menu.border = "rounded";
+                  documentation.window.border = "rounded";
+                };
+              };
+            };
 
             lsp.enable = true;
 
             languages = {
-                enableTreesitter = true;
-                nix = {
-                        enable = true;
-                };
+              enableTreesitter = true;
+              nix = {
+                enable = true;
+                format.enable = true;
+              };
+              rust = {
+                enable = true;
+                format.enable = true;
+                crates.enable = true;
+              };
+              python = {
+                enable = true;
+                format.enable = true;
+              };
             };
           };
         }];

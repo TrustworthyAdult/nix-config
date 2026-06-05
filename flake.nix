@@ -25,5 +25,8 @@
       (inputs.import-tree ./hosts)
     ];
     systems = import inputs.systems;
+    perSystem = { pkgs, ... }: {
+      formatter = pkgs.nixfmt;
+    };
   };
 }
