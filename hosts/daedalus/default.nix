@@ -22,7 +22,7 @@
       display
       mango
       noctalia
-      firefox
+      zen-browser
       ghostty
       neovim
       git
