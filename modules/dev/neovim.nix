@@ -16,26 +16,38 @@
                 theme = {
                   enable = true;
                   name = "nord";
-                  transparent = false;
                 };
-                # extraPlugins = {
-                #   kanagawa = {
-                #     package = pkgs.vimPlugins.kanagawa-nvim;
-                #     setup = "require('kanagawa').setup({ transparent = true })";
-                #   };
-                # };
-                # luaConfigPost = ''
-                #   vim.cmd.colorscheme("kanagawa-dragon")
-                # '';
 
                 # --- binds ---
                 binds.whichKey.enable = true;
 
                 # --- navigation ---
-                telescope.enable = true;
+                mini.pick.enable = true;
                 utility.oil-nvim = {
                   enable = true;
                   gitStatus.enable = true;
+                };
+                maps.normal = {
+                  "<leader>ff" = {
+                    action = "<cmd>lua MiniPick.builtin.files()<CR>";
+                    desc = "Find files";
+                    silent = true;
+                  };
+                  "<leader>fg" = {
+                    action = "<cmd>lua MiniPick.builtin.grep_live()<CR>";
+                    desc = "Live grep";
+                    silent = true;
+                  };
+                  "<leader>fb" = {
+                    action = "<cmd>lua MiniPick.builtin.buffers()<CR>";
+                    desc = "Buffers";
+                    silent = true;
+                  };
+                  "<leader>fh" = {
+                    action = "<cmd>lua MiniPick.builtin.help()<CR>";
+                    desc = "Help";
+                    silent = true;
+                  };
                 };
 
                 # --- completion ---
