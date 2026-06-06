@@ -81,10 +81,47 @@
                     desc = "Command history";
                     silent = true;
                   };
-                  # lsp
+                  # lsp — override neovim's native LSP keys with snacks pickers
+                  # nvf's <leader>lgX equivalents are nulled out below
+                  "gd" = {
+                    action = "<cmd>lua Snacks.picker.lsp_definitions()<CR>";
+                    desc = "Go to definition";
+                    silent = true;
+                  };
+                  "gD" = {
+                    action = "<cmd>lua Snacks.picker.lsp_declarations()<CR>";
+                    desc = "Go to declaration";
+                    silent = true;
+                  };
+                  "grr" = {
+                    action = "<cmd>lua Snacks.picker.lsp_references()<CR>";
+                    desc = "References";
+                    silent = true;
+                  };
+                  "gri" = {
+                    action = "<cmd>lua Snacks.picker.lsp_implementations()<CR>";
+                    desc = "Implementations";
+                    silent = true;
+                  };
+                  "grt" = {
+                    action = "<cmd>lua Snacks.picker.lsp_type_definitions()<CR>";
+                    desc = "Type definition";
+                    silent = true;
+                  };
+                  "gO" = {
+                    action = "<cmd>lua Snacks.picker.lsp_symbols()<CR>";
+                    desc = "Document symbols";
+                    silent = true;
+                  };
+                  # lsp finder shortcuts
                   "<leader>fs" = {
                     action = "<cmd>lua Snacks.picker.lsp_symbols()<CR>";
-                    desc = "LSP symbols";
+                    desc = "LSP document symbols";
+                    silent = true;
+                  };
+                  "<leader>fS" = {
+                    action = "<cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>";
+                    desc = "LSP workspace symbols";
                     silent = true;
                   };
                   "<leader>fd" = {
@@ -143,7 +180,18 @@
                 };
 
                 # --- lsp ---
-                lsp.enable = true;
+                lsp = {
+                  enable = true;
+                  mappings = {
+                    goToDefinition = null;
+                    goToDeclaration = null;
+                    goToType = null;
+                    listImplementations = null;
+                    listReferences = null;
+                    listDocumentSymbols = null;
+                    listWorkspaceSymbols = null;
+                  };
+                };
 
                 # --- languages ---
                 languages = {
