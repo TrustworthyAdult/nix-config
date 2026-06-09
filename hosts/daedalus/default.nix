@@ -27,6 +27,7 @@
       openttd
       dolphin
       fastfetch
+      fonts
       ./_hardware.nix
     ];
 

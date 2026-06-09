@@ -2,12 +2,12 @@
 {
   flake.modules.nixos.boot = {
     boot.loader = {
-        grub = {
-          enable = true;
-          device = "nodev";
-          efiSupport = true;
-        };
-        efi.canTouchEfiVariables = true;
+      grub = {
+        enable = true;
+        device = "nodev";
+        efiSupport = true;
+      };
+      efi.canTouchEfiVariables = true;
     };
   };
 }
