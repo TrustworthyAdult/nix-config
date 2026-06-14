@@ -24,6 +24,7 @@
       ghostty
       neovim
       git
+      direnv
       openttd
       dolphin
       fastfetch

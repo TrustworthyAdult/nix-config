@@ -5,6 +5,7 @@
     {
       environment.systemPackages = [
         pkgs.ripgrep
+        pkgs.fd # used by snacks' projects picker to scan for projects
         (inputs.nvf.lib.neovimConfiguration {
           inherit pkgs;
           modules = [
@@ -16,7 +17,39 @@
                 mini.icons.enable = true;
                 theme = {
                   enable = true;
-                  name = "nord";
+                  name = "everforest";
+                  style = "hard";
+                  transparent = true;
+                };
+                ui.borders = {
+                  enable = true;
+                  globalStyle = "rounded";
+                };
+                ui.noice = {
+                  enable = true;
+                  setupOpts = {
+                    lsp = {
+                      override = {
+                        "vim.lsp.util.convert_input_to_markdown_lines" = true;
+                        "vim.lsp.util.stylize_markdown" = true;
+                      };
+                      signature.enabled = true;
+                    };
+                    presets = {
+                      bottom_search = true;
+                      command_palette = true;
+                      long_message_to_split = true;
+                      lsp_doc_border = true;
+                    };
+                  };
+                };
+                notify.nvim-notify = {
+                  enable = true;
+                  setupOpts = {
+                    render = "compact";
+                    stages = "fade_in_slide_out";
+                    background_colour = "#272e33";
+                  };
                 };
 
                 # --- binds ---
@@ -25,11 +58,83 @@
                 # --- navigation ---
                 utility.snacks-nvim = {
                   enable = true;
-                  setupOpts.picker.enabled = true;
+                  setupOpts = {
+                    picker = {
+                      enabled = true;
+                      # Where the projects picker looks for projects.
+                      sources.projects.dev = [ "~/Projects" ];
+                    };
+                    # Dashboard shown when running `nvim` with no file.
+                    # Keys are snacks' functional defaults plus a project
+                    # picker; the default Config/Lazy/Restore-Session keys are
+                    # dropped as nothing in this config backs them.
+                    dashboard = {
+                      enabled = true;
+                      # Default sections minus "startup", which needs
+                      # lazy.nvim's stats (unused here) and otherwise errors.
+                      sections = [
+                        { section = "header"; }
+                        {
+                          section = "keys";
+                          gap = 1;
+                          padding = 1;
+                        }
+                      ];
+                      preset.keys = [
+                        {
+                          key = "p";
+                          desc = "Projects";
+                          action = ":lua Snacks.picker.projects()";
+                        }
+                        {
+                          key = "f";
+                          desc = "Find File";
+                          action = ":lua Snacks.dashboard.pick('files')";
+                        }
+                        {
+                          key = "n";
+                          desc = "New File";
+                          action = ":ene | startinsert";
+                        }
+                        {
+                          key = "g";
+                          desc = "Find Text";
+                          action = ":lua Snacks.dashboard.pick('live_grep')";
+                        }
+                        {
+                          key = "r";
+                          desc = "Recent Files";
+                          action = ":lua Snacks.dashboard.pick('oldfiles')";
+                        }
+                        {
+                          key = "q";
+                          desc = "Quit";
+                          action = ":qa";
+                        }
+                      ];
+                    };
+                  };
                 };
                 utility.oil-nvim = {
                   enable = true;
                   gitStatus.enable = true;
+                };
+                # Sync nvim's env with direnv so flake devShell tooling
+                # (e.g. rust-analyzer) is available regardless of launch dir.
+                utility.direnv.enable = true;
+                # Auto-detect the project root and chdir to it on buffer open.
+                # The resulting :cd fires DirChanged -> direnv loads the
+                # project's .envrc, so opening a file any way (not just from
+                # inside the dir) picks up the flake's tooling.
+                projects.project-nvim = {
+                  enable = true;
+                  setupOpts = {
+                    manual_mode = false;
+                    # Pattern detection (.git/flake.nix/etc.) covers our repos
+                    # and avoids the "lsp" method, which calls a deprecated
+                    # vim.lsp API and prints a warning on startup.
+                    detection_methods = [ "pattern" ];
+                  };
                 };
                 maps.normal = {
                   # files
@@ -176,8 +281,20 @@
                       menu.border = "rounded";
                       documentation.window.border = "rounded";
                     };
+                    keymap = {
+                      "<C-n>" = [ "select_next" "fallback" ];
+                      "<C-p>" = [ "select_prev" "fallback" ];
+                      "<C-y>" = [ "accept" "fallback" ];
+                    };
                   };
                 };
+
+                # --- diagnostics ---
+                luaConfigRC.diagnosticFloat = ''
+                  vim.diagnostic.config({
+                    float = { border = "rounded" },
+                  })
+                '';
 
                 # --- lsp ---
                 lsp = {
