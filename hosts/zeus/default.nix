@@ -9,6 +9,7 @@
     ../../modules/nix.nix
     ../../modules/apps.nix
     ../../modules/ghostty.nix
+    ../../modules/zsh.nix
     ../../users/michael.nix
   ];
 

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ ... }:
 {
   users.users.michael = {
     isNormalUser = true;
@@ -8,7 +8,6 @@
       "networkmanager"
       "wheel"
     ];
-    shell = pkgs.zsh;
   };
 
   programs.zsh.enable = true;
