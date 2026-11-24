@@ -12,6 +12,7 @@
       ../../modules/desktop-gnome.nix
       ../../modules/nix.nix
       ../../modules/audio.nix
+      ../../modules/terminal.nix
       ../../modules/git.nix
       ../../users/michael.nix
     ];
