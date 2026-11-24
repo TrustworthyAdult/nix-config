@@ -1,62 +1,27 @@
 { config, pkgs, ... }:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  networking.hostName = "zeus";
 
   imports =
     [
       ./hardware-configuration.nix
       ../../modules/locale.nix
       ../../modules/boot.nix
+      ../../modules/networking.nix
+      ../../modules/desktop-gnome.nix
+      ../../modules/nix.nix
+      ../../modules/audio.nix
+      ../../modules/git.nix
+      ../../users/michael.nix
     ];
-
-  networking.hostName = "zeus"; # Define your hostname.
-  networking.networkmanager.enable = true;
-  services.xserver.enable = true;
-
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  services.xserver.xkb = {
-    layout = "gb";
-    variant = "";
-  };
-
-  console.keyMap = "uk";
 
   services.printing.enable = true;
-
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  users.users."michael" = {
-    isNormalUser = true;
-    description = "Michael Ross";
-	initialPassword = "changeme";
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    ];
-    shell = pkgs.zsh;
-  };
 
   programs.firefox.enable = true;
   programs.zsh.enable = true;
 
-  programs.git = {
-  	enable = true;
-	config.user = {
-		name = "Michael Ross";
-		email = "michaeljrossdev@gmail.com";
-	};
-  };
 
-  nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
      neovim
