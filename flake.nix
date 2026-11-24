@@ -1,6 +1,10 @@
 {
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.wrappers.url = "github:nix-community/nix-wrapper-modules";
+  inputs.nvf = {
+    url = "github:NotAShelf/nvf";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
 
   outputs =
     { nixpkgs, ... }@inputs:

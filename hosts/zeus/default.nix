@@ -10,6 +10,7 @@
     ../../modules/apps.nix
     ../../modules/ghostty.nix
     ../../modules/zsh.nix
+    ../../modules/neovim.nix
     ../../users/michael.nix
   ];
 
