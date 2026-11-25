@@ -4,6 +4,7 @@
     ../../modules/audio.nix
     ../../modules/boot.nix
     ../../modules/desktop-gnome.nix
+    ../../modules/niri.nix
     ../../modules/locale.nix
     ../../modules/networking.nix
     ../../modules/nix.nix
